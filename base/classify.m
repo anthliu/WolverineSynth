@@ -1,10 +1,18 @@
-function freqs = classify(signal, Fs)
-    min_freq = 40;
-    max_freq = 10000;
+function freqs = classify(signal, Fs, thresh)
+    candidates = 440 * 2.^[-2:1/12:2];
 
     N = length(signal);
-    if (mod(N, n) * Fs / N) < 10000)
-        max_freq = mod(N, n) * Fs / N;
-    end
+
     spect = abs(fft(Fs));
+    spectro = spect(1:end/2);
+
+    scores = [];
+    for cand = candidates
+        c_mean = cand * N / Fs + 1;
+        c_dev = 0.008 * cand * N / Fs + 1;
+        score = normpdf([1:N / 2], c_mean, c_dev);
+        scores = [scores score];
+    end
+
+    freqs = candidates(scores > thresh);
 end
