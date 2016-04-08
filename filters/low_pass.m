@@ -1,14 +1,12 @@
-function filter = low_pass(cutoff, signal, Fs)
-    L = length(signal);
+function filter = low_pass(cutoff, signal)
+    N = length(signal);
 
     %%%%
+    
+    cutoff = round(cutoff * N / 8192 + 1);
 
-    hsupp = (-(L-1)/2:(L-1)/2);
-    hideal = (2*cutoff/Fs)*sinc(2*cutoff*hsupp/Fs);
-    h = hamming(L)' .* hideal;
+    z = fft(signal);
+    z(cutoff:end - cutoff) = 0;
 
-    %%%%
-    plot(abs(fft(h)));
-
-    filter = real(ifft(fft(signal) .* fft(h)));
+    filter = real(ifft(z));
 end
