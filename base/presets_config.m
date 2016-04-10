@@ -20,5 +20,6 @@ presets_timbres = {
 
 presets_envs = {
     @(t) ones(size(t)),...
-    violin_env};
+    violin_env,...
+    piano_env};
 
