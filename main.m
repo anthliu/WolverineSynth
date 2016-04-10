@@ -376,8 +376,9 @@ envelope_bar = uicontrol(effect_gp(1),...
 
 %% FILTER EFFECTS
 
-filter_config;
+filter_config_e;
 filter_var = 50;
+
 
 filter_config = uicontrol(effect_gp(3),...
     'Style', 'edit',...
