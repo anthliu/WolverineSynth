@@ -8,7 +8,7 @@ function [] = update_plot(note_list)
     end
 
     if (length(times) == 1)
-        notes = -4
+        notes = -4;
         times = 0;
     else
         times(end) = [];
