@@ -10,7 +10,6 @@ function sig = all_track_to_sig(cumul, tm)
         elseif length(cur_sig) > length(sig)
             sig(length(cur_sig)) = 0;
         end
-        whos
         sig = sig + cur_sig;
     end
 end
