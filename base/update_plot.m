@@ -7,9 +7,14 @@ function [] = update_plot(note_list)
         times = [times times(end)+nts.beats];
     end
 
-    times(end) = [];
+    if (length(times) == 1)
+        notes = -4
+        times = 0;
+    else
+        times(end) = [];
+        notes = 4 + 12 * log2(freqs / 440);
+    end
 
-    notes = 4 + 12 * log2(freqs / 440);
 
     stem(times, notes, 'filled');
     if (times(end) < 20)
